@@ -18,7 +18,7 @@ public class GosslingatorTest {
         //0.spustit prehliadac
         driver = new ChromeDriver();
         //1.otvorit stranku
-        driver.get("http://localhost/gosslingator.php");
+        driver.get("http://localhost:81/gosslingator.php");
     }
 
     @After
@@ -74,6 +74,8 @@ public class GosslingatorTest {
 
         WebElement addRyanButton = driver.findElement(By.id("addRyan"));
         for (int i = 0; i < 50; i++) {
+            int numberOfRyanImages = driver.findElements(By.cssSelector("img")).size();
+            Assert.assertEquals(i,numberOfRyanImages);
             addRyanButton.click();
             actualNumberOfRyans = driver.findElement(By.id("ryanCounter")).getText();
             Assert.assertEquals(String.valueOf(i + 1), actualNumberOfRyans);
@@ -113,6 +115,15 @@ public class GosslingatorTest {
             actualNumberOfRyans = driver.findElement(By.id("ryanCounter")).getText();
             clicks++;
         }
+    }
+
+    @Test
+    public void itShouldDisplayNoRyanOnPageOpe(){
+
+        Assert.assertEquals(0,driver.findElements(By.cssSelector("img")).size());
+
+
+
     }
 }
 
