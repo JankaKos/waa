@@ -1,5 +1,7 @@
 package tests;
 
+import io.codearte.jfairy.Fairy;
+import io.codearte.jfairy.producer.person.Person;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,16 +32,14 @@ public class RegistrationTest {
 
     @Test
     public void itShouldRegisterValidUser() {
-        String email = "hruska@gmail.com";
-        String meno = "Hruska";
-        String priezvisko = "Zelena";
-        String heslo = "123456";
+        Fairy fairy = Fairy.create();
+        Person person = fairy.person();
 
-        driver.findElement(By.name("email")).sendKeys(email);
-        driver.findElement(By.name("name")).sendKeys(meno);
-        driver.findElement(By.name("surname")).sendKeys(priezvisko);
-        driver.findElement(By.name("password")).sendKeys(heslo);
-        driver.findElement(By.name("password-repeat")).sendKeys(heslo);
+        driver.findElement(By.name("email")).sendKeys(person.getEmail());
+        driver.findElement(By.name("name")).sendKeys(person.getFirstName());
+        driver.findElement(By.name("surname")).sendKeys(person.getLastName());
+        driver.findElement(By.name("password")).sendKeys(person.getPassword());
+        driver.findElement(By.name("password-repeat")).sendKeys(person.getPassword());
         driver.findElement(By.name("robot")).click();
         driver.findElement(By.cssSelector("button.btn-success")).click();
 
