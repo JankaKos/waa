@@ -81,7 +81,7 @@ public class FellowshipTest {
 
         for (WebElement displayedFellow : displayedFellows) {
             String actualPoints = displayedFellow.findElement(By.cssSelector("div.fellow-points h2")).getText();
-            Assert.assertEquals(actualPoints.isEmpty());
+            Assert.assertFalse(actualPoints.isEmpty());
 
         }
 
