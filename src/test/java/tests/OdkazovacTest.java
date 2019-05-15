@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.sql.Timestamp;
+
 public class OdkazovacTest extends TestBase {
 
     @Before
@@ -15,8 +17,9 @@ public class OdkazovacTest extends TestBase {
     }
 
     @Test
-    public void addNew () throws InterruptedException {
-        String titulok = "titulok";
+    public void addNew() throws InterruptedException {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String titulok = "titulok " + timestamp.getTime();
         String mojeMeno = "Moje meno";
         String textOdkazu = "Ahoj, dakujem za prispevok";
 
@@ -31,11 +34,11 @@ public class OdkazovacTest extends TestBase {
         detailButton.click();
         Thread.sleep(3000);
 
-      //bonus
+        //bonus
         WebElement detailOdkazu = driver.findElement(By.cssSelector("div.content"));
-        Assert.assertEquals(titulok,detailOdkazu.findElement(By.cssSelector("h4.title")).getText());
+        Assert.assertEquals(titulok, detailOdkazu.findElement(By.cssSelector("h4.title")).getText());
         Assert.assertEquals(mojeMeno, detailOdkazu.findElement(By.cssSelector("h4.recipent")).getText());
-        Assert.assertEquals(textOdkazu,detailOdkazu.findElement(By.cssSelector("p")).getText());
+        Assert.assertEquals(textOdkazu, detailOdkazu.findElement(By.cssSelector("p")).getText());
 
     }
 
