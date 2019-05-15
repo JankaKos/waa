@@ -56,6 +56,35 @@ public class FellowshipTest {
         }
         //System.out.println("ahoj");
 
+    @Test
+    public void itShouldDisplayComplete (){
+        String[] fellowToSelected = {"Samwise", "Gimli", "Gandalf", "Aragorn"};
+        for (String fellow : fellowToSelected) {
+            driver.findElement(By.xpath("//div[h1[contains(text(), '" + fellow + "')]]")).click();
+        }
+            Assert.assertEquals("complete", driver.findElement(By.cssSelector("div.points-left h3"))
+            .getText()
+            .toLowerCase());
+        }
 
+    @Test
+    public void itShouldDisplayCountOf() {
+
+
+        Assert.assertEquals("25", driver.findElement(By.cssSelector("div.points-left h2"))
+                .getText());
+    }
+
+    @Test
+    public void itShouldDisplayPointsForEachFellow() {
+        List<WebElement> displayedFellows = driver.findElements(By.cssSelector("ul.list-of-fellows li"));
+
+        for (WebElement displayedFellow : displayedFellows) {
+            String actualPoints = displayedFellow.findElement(By.cssSelector("div.fellow-points h2")).getText();
+            Assert.assertEquals(actualPoints.isEmpty());
+
+        }
+
+    }
 
 }
