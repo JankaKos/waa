@@ -1,5 +1,6 @@
 package tests;
 
+import base.TestBase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
@@ -10,53 +11,29 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
-public class RandomTableTest {
-    WebDriver driver;
+public class RandomTableTest extends TestBase {
+
     @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-        //0.spustit prehliadac
-        driver = new ChromeDriver();
-        //1.otvorit stranku
-        driver.get("http://localhost:81/tabulka.php");
+    public void openPage() {
+
+        driver.get(BASE_URL + "/tabulka.php");
     }
 
 
     @Test
 
     public void itShouldPrintLastRow() {
-
-        System.setProperty("webdriver.chrome.driver", "chromedriver74");
-
-        // 0. spustit prehliadac
-        WebDriver driver = new ChromeDriver();
-        // 1. otvorit stranku
-        driver.get("http://localhost:81/tabulka.php");
-        // 2. nájdem a vypisem posledny riadok
         driver.findElement(By.xpath("//table/tbody/tr[last()]"));
         System.out.println(driver.findElement(By.xpath("//table/tbody/tr[last()]")).getText());
-        //4. zatvorit prehliadac
-        driver.close();
-        //.5. ukoncit session
-        driver.quit();
+
+
     }
 
     @Test
 
     public void itShouldPrintOneBeforeLastRow() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-
-        // 0. spustit prehliadac
-        WebDriver driver = new ChromeDriver();
-        // 1. otvorit stranku
-        driver.get("http://localhost:8888/tabulka.php");
-        // 2. nájdem a vypisem meno z predposledného riadku
         driver.findElement(By.xpath("//table/tbody/tr[last()-1]/td[2]"));
         System.out.println(driver.findElement(By.xpath("//table/tbody/tr[last()-1]/td[2]")).getText());
-        //4. zatvorit prehliadac
-        driver.close();
-        //.5. ukoncit session
-        driver.quit();
     }
 
     @Test

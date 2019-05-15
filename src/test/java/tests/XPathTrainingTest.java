@@ -1,6 +1,7 @@
 package tests;
 
 
+import base.TestBase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,24 +12,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class XPathTrainingTest {
-    WebDriver driver = null;
+public class XPathTrainingTest extends TestBase {
+
 
     @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-        //0.spustit prehliadac
-        driver = new ChromeDriver();
-        //1.otvorit stranku
-        driver.get("http://localhost:81/xpathtrainingcenter.php");
+    public void openPage() {
 
-
-    }
-    @After
-    public void tearDown() {
-        driver.close();
-        driver.quit();
-        System.out.println("s panom bohom");
+        driver.get(BASE_URL + "/xpathtrainingcenter.php");
     }
 
     @Test

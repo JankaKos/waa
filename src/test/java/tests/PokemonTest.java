@@ -1,5 +1,6 @@
 package tests;
 
+import base.TestBase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,26 +11,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class PokemonTest {
-
-    WebDriver driver;
+public class PokemonTest extends TestBase {
 
     @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-        //0.spustit prehliadac
-        driver = new ChromeDriver();
-        //1.otvorit stranku
-        driver.get("http://localhost/vybersi.php");
+    public void openPage() {
+        driver.get(BASE_URL + "/vybersi.php");
     }
 
-    @After
-    public void tearDown() {
-        driver.close();
-        driver.quit();
-        System.out.println("s panom bohom");
-    }
-    @Test
+  @Test
     public void itShouldSelectPikachu(){
         String selectedPokemon= "Pikachu";
         String[] selectedPokemons= {"Pikachu", "Bulbasaur","Charmander","Squirtle", "Diglett", "Geodude"};

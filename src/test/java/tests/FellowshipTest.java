@@ -1,4 +1,5 @@
 package tests;
+import base.TestBase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,24 +12,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FellowshipTest {
-    WebDriver driver;
+public class FellowshipTest extends TestBase {
 
     @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-        //0.spustit prehliadac
-        driver = new ChromeDriver();
-        //1.otvorit stranku
-        driver.get("http://localhost:81/fellowship.php");
+    public void openPage() {
+        driver.get( BASE_URL + "/fellowship.php");
     }
 
-    @After
-    public void tearDown() {
-        driver.close();
-        driver.quit();
-        System.out.println("s panom bohom");
-    }
 
 @Test
     public void itShouldContainNameForEachFellow(){
