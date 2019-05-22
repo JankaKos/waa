@@ -25,25 +25,16 @@ public class XPathTrainingTest extends TestBase {
     public void itShouldDisplayAction() {
         String buttonText = "One more button";
         driver.findElement(By.xpath("//button[contains(text(), '" + buttonText + "')]")).click();
-        String actualMessage = driver.findElement(By.cssSelector("div.output h2 span")).getText();
-        Assert.assertEquals(
-                "you clicked " + buttonText.toLowerCase(), actualMessage
-        );
+        Assert.assertEquals("you clicked " + buttonText.toLowerCase(), actualMessage());
     }
 
 
     @Test
     public void itShouldDisplayEnteredMessage() {
         String message = "vonku prsi";
-
         driver.findElement(By.cssSelector("input")).sendKeys(message);
         driver.findElement(By.id("hitme")).click();
-        //precitam hodnotu zo stranky a ulozim ju do premennej
-        String actualMessage = driver.findElement(By.cssSelector("div.output h2 span")).getText();
-
-        Assert.assertEquals(
-                "you entered " + message,
-                actualMessage);
+        Assert.assertEquals("you entered " + message, actualMessage());
     }
 
     @Test
@@ -52,11 +43,9 @@ public class XPathTrainingTest extends TestBase {
         String[] selectedButtons = {"First one", "Second button", "Next button", "One more button", "Danger", "Success", "Warning"};
 
         for (String button : selectedButtons) {
-            WebElement buttonSelect = driver.findElement(By.xpath("//button[contains(text(), '" + button + "')]"));
-            buttonSelect.click();
+            itShouldClickButton(button);
             String expectedMessage = "you clicked " + button.toLowerCase();
-            String actualMessage = driver.findElement(By.cssSelector("div.output h2 span")).getText();
-            Assert.assertEquals(expectedMessage, actualMessage);
+            Assert.assertEquals(expectedMessage, actualMessage());
         }
     }
 
@@ -68,8 +57,7 @@ public class XPathTrainingTest extends TestBase {
             new Select(selectedMoznost).selectByIndex(i);
             String s = moznostiSelected[i];
             String expectedMessage = "you have chosen " + s.toLowerCase();
-            String actualMessage = driver.findElement(By.cssSelector("div.output h2 span")).getText();
-            Assert.assertEquals(expectedMessage, actualMessage);
+            Assert.assertEquals(expectedMessage, actualMessage());
         }
     }
 
@@ -81,9 +69,15 @@ public class XPathTrainingTest extends TestBase {
             new Select(selectedMoznost).selectByIndex(i);
             String s = moznostiSelected[i];
             String expectedMessage = "you have chosen " + s.toLowerCase();
-            String actualMessage = driver.findElement(By.cssSelector("div.output h2 span")).getText();
-            Assert.assertEquals(expectedMessage, actualMessage);
+            Assert.assertEquals(expectedMessage, actualMessage());
         }
     }
 
+    private void itShouldClickButton(String button) {
+        driver.findElement(By.xpath("//button[contains(text(), '" + button + "')]")).click();
+    }
+
+    private String actualMessage() {
+        return driver.findElement(By.cssSelector("div.output h2 span")).getText();
+    }
 }
