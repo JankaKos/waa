@@ -21,7 +21,5 @@ public class PokemonPage {
         return pageDriver.findElement(By.cssSelector("div.pokemon h3")).getText();
     }
 
-    public String getExpectedMessage(String pokemonName){
-        return  String.format("I choose you %s !", pokemonName);
-    }
+
 }
