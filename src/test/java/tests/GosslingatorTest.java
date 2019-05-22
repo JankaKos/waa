@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.GosslingatorPage;
 
 public class GosslingatorTest extends TestBase {
 
@@ -19,29 +20,30 @@ public class GosslingatorTest extends TestBase {
     }
 
 
-
     private String actualNumberOfRyans;
 
     @Test
     public void itShouldAddRyan() {
         //2.kliknut na button Ryan
-        addRyan();
+        GosslingatorPage gossPage = new GosslingatorPage(driver);
+        gossPage.addRyan();
         //3.overit pocitanie Ryanov
-        Assert.assertEquals("1", actualNumberOfRyans());
-        System.out.println("Number of ryans: " + actualNumberOfRyans());
+        Assert.assertEquals("1", gossPage.actualNumberOfRyans());
+        System.out.println("Number of ryans: " + gossPage.actualNumberOfRyans());
 
-        Assert.assertEquals("ryan", actualDescription());
+        Assert.assertEquals("ryan", gossPage.actualDescription());
 
 
     }
 
     @Test
     public void itShouldAddTwoRyan() {
-        addRyan();
-        addRyan();
+        GosslingatorPage gossPage = new GosslingatorPage(driver);
+        gossPage.addRyan();
+        gossPage.addRyan();
         //3.overit pocitanie Ryanov
-        Assert.assertEquals("2", actualNumberOfRyans());
-        Assert.assertEquals("ryans", actualDescription());
+        Assert.assertEquals("2", gossPage.actualNumberOfRyans());
+        Assert.assertEquals("ryans", gossPage.actualDescription());
     }
 
     @Test
@@ -54,15 +56,16 @@ public class GosslingatorTest extends TestBase {
 
     @Test
     public void itShouldItDisplayWarningMessage() {
+        GosslingatorPage gossPage = new GosslingatorPage(driver);
         for (int i = 0; i < 50; i++) {
-            Assert.assertEquals(i, getNumberOfRyanImages());
-            addRyan();
-            Assert.assertEquals(String.valueOf(i + 1), actualNumberOfRyans());
+            Assert.assertEquals(i, gossPage.getNumberOfRyanImages());
+            gossPage.addRyan();
+            Assert.assertEquals(String.valueOf(i + 1), gossPage.actualNumberOfRyans());
             if (i + 1 == 1) {
-                Assert.assertEquals("ryan", actualDescription());
+                Assert.assertEquals("ryan", gossPage.actualDescription());
             }
             if (i + 1 >= 2) {
-                Assert.assertEquals("ryans", actualDescription());
+                Assert.assertEquals("ryans", gossPage.actualDescription());
             }
         }
 
@@ -81,34 +84,25 @@ public class GosslingatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayWarningMessageUsingWhileCycle() {
-
-        actualNumberOfRyans();
+        GosslingatorPage gossPage = new GosslingatorPage(driver);
+        gossPage.actualNumberOfRyans();
         int clicksLimit= 30;
         int clicks = 0;
-        while (!actualNumberOfRyans().equals("50")|| clicks <= clicksLimit ) {
-            addRyan();
+        while (!gossPage.actualNumberOfRyans().equals("50")|| clicks <= clicksLimit ) {
+            gossPage.addRyan();
             clicks++;
         }
     }
 
     @Test
     public void itShouldDisplayNoRyanOnPageOpe(){
+        GosslingatorPage gossPage = new GosslingatorPage(driver);
+        Assert.assertEquals(0,gossPage.getNumberOfRyanImages());
 
-        Assert.assertEquals(0,getNumberOfRyanImages());
-
     }
 
-    private void addRyan (){
-        driver.findElement(By.id("addRyan")).click();
-    }
-    private String actualNumberOfRyans(){
-       return driver.findElement(By.id("ryanCounter")).getText();
-    }
-    private String actualDescription(){
-        return  driver.findElement(By.cssSelector("div.ryan-counter h3")).getText();
-    }
-    private int getNumberOfRyanImages(){
-        return driver.findElements(By.cssSelector("img")).size();
-    }
+
+
+
 }
 
