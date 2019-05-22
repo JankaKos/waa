@@ -18,12 +18,12 @@ public class OdkazovacTest extends TestBase {
 
     @Test
     public void addNew() throws InterruptedException {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String titulok = "titulok " + timestamp.getTime();
+        String titulok = generateUniqueTitle();
         String mojeMeno = "Moje meno";
         String textOdkazu = "Ahoj, dakujem za prispevok";
         enterNoteData(titulok,mojeMeno,textOdkazu);
         submitNewNote();
+        checkNoteInList(titulok);
         Assert.assertTrue(driver.findElement(By.cssSelector("li.sin ")).isDisplayed());
         Assert.assertTrue(getLastNoteFromList().isDisplayed());
         getLastNoteFromList().click();
@@ -45,11 +45,23 @@ public class OdkazovacTest extends TestBase {
        return driver.findElement(By.cssSelector("ul.list-of-sins li:last-child"));
     }
 
-    private  void checkNoteDetail(String  title, String author, String message ) {
+    private void checkNoteDetail(String  title, String author, String message ) {
         WebElement detail = driver.findElement(By.cssSelector("div.content"));
         Assert.assertEquals(title, detail.findElement(By.cssSelector("h4.title")).getText());
         Assert.assertEquals(author, detail.findElement(By.cssSelector("h4.recipent")).getText());
         Assert.assertEquals(message, detail.findElement(By.cssSelector("p")).getText());
     }
+    private String generateUniqueTitle(){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return "titulok " + timestamp.getTime();
+    }
 
+    private void checkNoteInList(String title) {
+        WebElement listItem = getLastNoteFromList();
+        //overim ze sa pridal novy zaznam do zoznamu
+        Assert.assertTrue(listItem.getText().contains(title));
+        //overenie linku
+        Assert.assertTrue(listItem.findElement(By.cssSelector("div.description a")).isDisplayed());
+        Assert.assertEquals("detail", listItem.findElement(By.cssSelector("div.description a")).getText());
+    }
 }
