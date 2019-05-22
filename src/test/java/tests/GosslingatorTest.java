@@ -12,11 +12,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.GosslingatorPage;
 
 public class GosslingatorTest extends TestBase {
-
+    private GosslingatorPage gossPage ;
 
     @Before
     public void openPage() {
         driver.get(BASE_URL + "/gosslingator.php");
+        gossPage = new GosslingatorPage(driver);
     }
 
 
@@ -25,7 +26,6 @@ public class GosslingatorTest extends TestBase {
     @Test
     public void itShouldAddRyan() {
         //2.kliknut na button Ryan
-        GosslingatorPage gossPage = new GosslingatorPage(driver);
         gossPage.addRyan();
         //3.overit pocitanie Ryanov
         Assert.assertEquals("1", gossPage.actualNumberOfRyans());
@@ -38,7 +38,6 @@ public class GosslingatorTest extends TestBase {
 
     @Test
     public void itShouldAddTwoRyan() {
-        GosslingatorPage gossPage = new GosslingatorPage(driver);
         gossPage.addRyan();
         gossPage.addRyan();
         //3.overit pocitanie Ryanov
@@ -56,7 +55,6 @@ public class GosslingatorTest extends TestBase {
 
     @Test
     public void itShouldItDisplayWarningMessage() {
-        GosslingatorPage gossPage = new GosslingatorPage(driver);
         for (int i = 0; i < 50; i++) {
             Assert.assertEquals(i, gossPage.getNumberOfRyanImages());
             gossPage.addRyan();
@@ -84,7 +82,6 @@ public class GosslingatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayWarningMessageUsingWhileCycle() {
-        GosslingatorPage gossPage = new GosslingatorPage(driver);
         gossPage.actualNumberOfRyans();
         int clicksLimit= 30;
         int clicks = 0;
@@ -96,7 +93,6 @@ public class GosslingatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayNoRyanOnPageOpe(){
-        GosslingatorPage gossPage = new GosslingatorPage(driver);
         Assert.assertEquals(0,gossPage.getNumberOfRyanImages());
 
     }
