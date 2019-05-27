@@ -1,13 +1,13 @@
 package tests;
 
 import base.TestBase;
+import models.Note;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.NotePage;
-
 import java.sql.Timestamp;
 
 public class NoteTest extends TestBase {
@@ -24,15 +24,17 @@ public class NoteTest extends TestBase {
         String titulok = generateUniqueTitle();
         String mojeMeno = "Moje meno";
         String textOdkazu = "Ahoj, dakujem za prispevok";
-        notePage.enterNoteData(titulok,mojeMeno,textOdkazu);
+        Note noteToAdd = new Note(titulok,mojeMeno,textOdkazu);
+
+        notePage.enterNoteData(noteToAdd);
         notePage.submitNewNote();
-        checkNoteInList(titulok);
+        checkNoteInList(noteToAdd.getTitle());
         Assert.assertTrue(driver.findElement(By.cssSelector("li.sin ")).isDisplayed());
         Assert.assertTrue(notePage.getLastNoteFromList().isDisplayed());
         notePage.getLastNoteFromList().click();
         Thread.sleep(3000);
         //bonus
-        notePage.checkNoteDetail(titulok, mojeMeno, textOdkazu);
+        notePage.checkNoteDetail(noteToAdd);
     }
 
 
