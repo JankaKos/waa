@@ -8,27 +8,30 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.ConchitaPage;
 
-public class ZenaAleboMuzTest extends TestBase {
+public class ConchitaTest extends TestBase {
+    private ConchitaPage conchitaPage;
 
     @Before
     public void openPage() {
         driver.get(BASE_URL + "/zenaalebomuz.php");
-    }
 
+        conchitaPage = new ConchitaPage(driver);
+    }
 
     @Test
     public void ItShouldBeNotSelected () {
 
 
-        Assert.assertFalse(driver.findElement(By.xpath("//input[@value='wurst']")).isSelected());
-        Assert.assertFalse(driver.findElement(By.xpath("//input[@value='conchita']")).isSelected());
+        Assert.assertFalse(conchitaPage.wurst.isSelected());
+        Assert.assertFalse(conchitaPage.conchita.isSelected());
     }
 
     @Test
     public void itShouldSelectMale() {
 
-        driver.findElement(By.xpath("//input[@value='wurst']")).click();
+        conchitaPage.clickWurst();
         //overit hlasku
         String expectedMessage = "It's wurst";
         String actualMessage = driver.findElement(By.cssSelector("h1.description")).getText();
@@ -38,8 +41,8 @@ public class ZenaAleboMuzTest extends TestBase {
 
     @Test
     public void ItShouldNotBeWoman(){
-        driver.findElement(By.xpath("//input[@value='wurst']")).click();
-        Assert.assertFalse(driver.findElement(By.xpath("//input[@value='conchita']")).isSelected());
+        conchitaPage.clickWurst();
+        Assert.assertFalse(conchitaPage.conchita.isSelected());
 
     }
 
@@ -48,4 +51,6 @@ public class ZenaAleboMuzTest extends TestBase {
         Assert.assertTrue(driver.findElement(By.cssSelector("img")).isDisplayed());
 
     }
+
+
 }
