@@ -10,14 +10,15 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.RegistrationPage;
 
 public class RegistrationTest extends TestBase {
-
+    private RegistrationPage registrationPage ;
     @Before
     public void openPage() {
         driver.get(BASE_URL + "/registracia.php");
-    }
 
+    registrationPage = new RegistrationPage(driver);}
 
     @Test
     public void itShouldRegisterValidUser() {
@@ -29,10 +30,8 @@ public class RegistrationTest extends TestBase {
         driver.findElement(By.name("surname")).sendKeys(person.getLastName());
         driver.findElement(By.name("password")).sendKeys(person.getPassword());
         driver.findElement(By.name("password-repeat")).sendKeys(person.getPassword());
-        driver.findElement(By.name("robot")).click();
-        driver.findElement(By.cssSelector("button.btn-success")).click();
-
-
+        registrationPage.clickRobot();
+        registrationPage.sendFormular();
         Assert.assertTrue(driver.findElement(By.cssSelector("div.alert-success")).isDisplayed());
 
 
@@ -40,11 +39,10 @@ public class RegistrationTest extends TestBase {
 
     @Test
     public void itShouldDisplayErrorMessageWhenInputsAreEmpty(){
-        driver.findElement(By.name("robot")).click();
-        driver.findElement(By.cssSelector("button.btn-success")).click();
+        registrationPage.clickRobot();
+        registrationPage.sendFormular();
         Assert.assertTrue(driver.findElement(By.cssSelector("div.alert-danger")).isDisplayed());
 
     }
-
 
 }
