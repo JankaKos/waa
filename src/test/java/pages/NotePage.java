@@ -4,18 +4,26 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class NotePage {
     WebDriver pageDriver;
-
+    @FindBy(name = "title")
+    private WebElement title;
+    @FindBy(name = "author")
+    private WebElement author;
+    @FindBy(name = "message")
+    private WebElement message;
 
     public NotePage(WebDriver driver) {
         this.pageDriver = driver;
+        PageFactory.initElements(pageDriver,this);
     }
     public void enterNoteData(String titulok, String mojeMeno, String textOdkazu){
-        pageDriver.findElement(By.name("title")).sendKeys(titulok);
-        pageDriver.findElement(By.name("author")).sendKeys(mojeMeno);
-        pageDriver.findElement(By.name("message")).sendKeys(textOdkazu);
+        title.sendKeys(titulok);
+        author.sendKeys(mojeMeno);
+        message.sendKeys(textOdkazu);
     }
     public void submitNewNote(){
         pageDriver.findElement(By.cssSelector("button.btn-block")).click();
