@@ -18,7 +18,7 @@ public class CalculatorPage {
     }
 
     @FindBy(id = "firstInput")
-    WebElement firstInput;
+    private WebElement firstInput;
     @FindBy(id = "secondInput")
     WebElement secondInput;
 
