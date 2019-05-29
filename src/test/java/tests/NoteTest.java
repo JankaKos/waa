@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.NotePage;
 import java.sql.Timestamp;
 
@@ -31,12 +33,9 @@ public class NoteTest extends TestBase {
         checkNoteInList(noteToAdd.getTitle());
         Assert.assertTrue(driver.findElement(By.cssSelector("li.sin ")).isDisplayed());
         Assert.assertTrue(notePage.getLastNoteFromList().isDisplayed());
-        notePage.getLastNoteFromList().click();
-        Thread.sleep(3000);
-        //bonus
+        notePage.openLastNote();
         notePage.checkNoteDetail(noteToAdd);
     }
-
 
 
     private String generateUniqueTitle(){

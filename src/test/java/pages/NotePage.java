@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NotePage {
     WebDriver pageDriver;
@@ -43,4 +45,10 @@ public class NotePage {
         Assert.assertEquals(note.getTitle(), detail.findElement(By.cssSelector("h4.title")).getText());
         Assert.assertEquals(note.getAuthor(), detail.findElement(By.cssSelector("h4.recipent")).getText());
         Assert.assertEquals(note.getMessage(), detail.findElement(By.cssSelector("p")).getText());}
+
+    public void openLastNote() {
+        getLastNoteFromList().click();
+        new WebDriverWait(pageDriver, 10)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.content")));
+    }
 }
