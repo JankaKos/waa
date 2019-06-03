@@ -3,15 +3,26 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class SavingsCalculatorPage {
 
     WebDriver pageDriver ;
+    @FindBy (id="fundSelect")
+    WebElement fundSelect;
+    @FindBy (id="oneTimeInvestmentInput")
+    WebElement investmentInput;
+    @FindBy (id="yearsInput")
+    WebElement yearsSelect;
+    @FindBy (id = "emailInput")
+    WebElement emailInput;
+
 
     public SavingsCalculatorPage (WebDriver driver){
-        this.pageDriver = driver;}
-
+        this.pageDriver = driver;
+        PageFactory.initElements(pageDriver,this);}
 
 
     public WebElement buttonApply (){
@@ -23,14 +34,10 @@ public class SavingsCalculatorPage {
     }
 
     public void sendKeysToTable (){
-        WebElement firstSelect = pageDriver.findElement(By.id("fundSelect"));
-        new Select(firstSelect).selectByIndex(2);
-        WebElement investmentInput = pageDriver.findElement(By.id("oneTimeInvestmentInput"));
+        new Select(fundSelect).selectByIndex(2);
         investmentInput.sendKeys("3000");
-        WebElement yearsSelect = pageDriver.findElement(By.id("yearsInput"));
         yearsSelect.sendKeys("5");
-        WebElement emailInput = pageDriver.findElement(By.id("emailInput"));
-        emailInput.sendKeys("gdkf@gmail.com");
+        emailInput.sendKeys("test@testing.com");
 
     }
 }
