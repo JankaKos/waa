@@ -21,7 +21,7 @@ public class SavingsCalculatorTest extends TestBase {
    @Test
    public void buttonIsEnable (){ 
        sendKeysToTable();
-       Assert.assertTrue(driver.findElement(By.cssSelector("button.btn-success")).isEnabled());
+       Assert.assertTrue(buttonApply().isEnabled());
 
        }
 @Test
@@ -41,7 +41,25 @@ public void itShouldDisplayedRisk (){
 
 }
 
+@Test
+public void itShouldDisplayedNewRecord (){
+        sendKeysToTable();
+        buttonApply().click();
+        Assert.assertTrue(lastRecord().isDisplayed());
+        Assert.assertTrue(lastRecord().getText().contains("Fund"));
+}
 
+
+
+
+
+public WebElement buttonApply (){
+    return driver.findElement(By.cssSelector("button.btn-success"));
+}
+
+public WebElement lastRecord(){
+        return driver.findElement(By.xpath("//ul/li[1]/div"));
+}
 
 public void sendKeysToTable (){
     WebElement firstSelect = driver.findElement(By.id("fundSelect"));
