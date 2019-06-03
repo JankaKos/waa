@@ -33,6 +33,13 @@ public class SavingsCalculatorTest extends TestBase {
         Assert.assertFalse(actualInterestIncome.isEmpty());
 
 }
+@Test
+public void itShouldDisplayedRisk (){
+        sendKeysToTable();
+        String actualRisk = driver.findElement(By.xpath("//div[3]/p")).getText();
+        Assert.assertFalse(actualRisk.isEmpty());
+
+}
 
 
 
