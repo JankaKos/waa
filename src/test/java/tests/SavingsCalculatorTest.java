@@ -1,6 +1,8 @@
 package tests;
 
 import base.TestBase;
+import io.codearte.jfairy.Fairy;
+import io.codearte.jfairy.producer.person.Person;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,17 +22,19 @@ public class SavingsCalculatorTest extends TestBase {
         savingsCalculatorPage = new SavingsCalculatorPage(driver);
     }
 
+    Fairy fairy = Fairy.create();
+    Person fakePerson = fairy.person();
 
     @Test
     public void buttonIsEnable() {
-        savingsCalculatorPage.sendKeysToTable();
+        savingsCalculatorPage.sendKeysToTable(2,"3000","5",fakePerson.getEmail());
         Assert.assertTrue(savingsCalculatorPage.buttonApply().isEnabled());
 
     }
 
     @Test
     public void itShouldActualIncomes() {
-        savingsCalculatorPage.sendKeysToTable();
+        savingsCalculatorPage.sendKeysToTable(2,"3000","5",fakePerson.getEmail());
         String actualTotalIncome = driver.findElement(By.xpath("//div[1]/p")).getText();
         String actualInterestIncome = driver.findElement(By.xpath("//div[2]/p")).getText();
         Assert.assertFalse(actualTotalIncome.isEmpty());
@@ -40,7 +44,7 @@ public class SavingsCalculatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayedRisk() {
-        savingsCalculatorPage.sendKeysToTable();
+        savingsCalculatorPage.sendKeysToTable(2,"3000","5",fakePerson.getEmail());
         String actualRisk = driver.findElement(By.xpath("//div[3]/p")).getText();
         Assert.assertFalse(actualRisk.isEmpty());
 
@@ -48,12 +52,11 @@ public class SavingsCalculatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayedNewRecord() {
-        savingsCalculatorPage.sendKeysToTable();
+        savingsCalculatorPage.sendKeysToTable(2,"3000","5","test@test.sk");
         savingsCalculatorPage.buttonApply().click();
         Assert.assertTrue(savingsCalculatorPage.lastRecord().isDisplayed());
         Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains("Fund"));
     }
-
 
 }
 

@@ -33,11 +33,11 @@ public class SavingsCalculatorPage {
         return pageDriver.findElement(By.xpath("//ul/li[1]/div"));
     }
 
-    public void sendKeysToTable (){
-        new Select(fundSelect).selectByIndex(2);
-        investmentInput.sendKeys("3000");
-        yearsSelect.sendKeys("5");
-        emailInput.sendKeys("test@testing.com");
+    public void sendKeysToTable (Integer number, String investment, String years, String email ){
+        new Select(fundSelect).selectByIndex(number);
+        investmentInput.sendKeys(investment);
+        yearsSelect.sendKeys(years);
+        emailInput.sendKeys(email);
 
     }
 }
