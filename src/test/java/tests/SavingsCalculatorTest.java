@@ -35,24 +35,21 @@ public class SavingsCalculatorTest extends TestBase {
     @Test
     public void itShouldActualIncomes() {
         savingsCalculatorPage.sendKeysToTable(2,"3000","5",fakePerson.getEmail());
-        String actualTotalIncome = driver.findElement(By.xpath("//div[1]/p")).getText();
-        String actualInterestIncome = driver.findElement(By.xpath("//div[2]/p")).getText();
-        Assert.assertFalse(actualTotalIncome.isEmpty());
-        Assert.assertFalse(actualInterestIncome.isEmpty());
+        Assert.assertFalse(savingsCalculatorPage.actualTotalIncome().isEmpty());
+        Assert.assertFalse(savingsCalculatorPage.actualInterestIncome().isEmpty());
 
     }
 
     @Test
     public void itShouldDisplayedRisk() {
         savingsCalculatorPage.sendKeysToTable(2,"3000","5",fakePerson.getEmail());
-        String actualRisk = driver.findElement(By.xpath("//div[3]/p")).getText();
-        Assert.assertFalse(actualRisk.isEmpty());
+        Assert.assertFalse(savingsCalculatorPage.actualRisk().isEmpty());
 
     }
 
     @Test
     public void itShouldDisplayedNewRecord() {
-        savingsCalculatorPage.sendKeysToTable(2,"3000","5","test@test.sk");
+        savingsCalculatorPage.sendKeysToTable(2,"3000","5",fakePerson.getEmail());
         savingsCalculatorPage.buttonApply().click();
         Assert.assertTrue(savingsCalculatorPage.lastRecord().isDisplayed());
         Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains("Fund"));

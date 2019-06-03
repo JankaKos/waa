@@ -9,35 +9,48 @@ import org.openqa.selenium.support.ui.Select;
 
 public class SavingsCalculatorPage {
 
-    WebDriver pageDriver ;
-    @FindBy (id="fundSelect")
+    WebDriver pageDriver;
+    @FindBy(id = "fundSelect")
     WebElement fundSelect;
-    @FindBy (id="oneTimeInvestmentInput")
+    @FindBy(id = "oneTimeInvestmentInput")
     WebElement investmentInput;
-    @FindBy (id="yearsInput")
+    @FindBy(id = "yearsInput")
     WebElement yearsSelect;
-    @FindBy (id = "emailInput")
+    @FindBy(id = "emailInput")
     WebElement emailInput;
 
 
-    public SavingsCalculatorPage (WebDriver driver){
+    public SavingsCalculatorPage(WebDriver driver) {
         this.pageDriver = driver;
-        PageFactory.initElements(pageDriver,this);}
+        PageFactory.initElements(pageDriver, this);
+    }
 
 
-    public WebElement buttonApply (){
+    public WebElement buttonApply() {
         return pageDriver.findElement(By.cssSelector("button.btn-success"));
     }
 
-    public WebElement lastRecord(){
+    public WebElement lastRecord() {
         return pageDriver.findElement(By.xpath("//ul/li[1]/div"));
     }
 
-    public void sendKeysToTable (Integer number, String investment, String years, String email ){
+    public void sendKeysToTable(Integer number, String investment, String years, String email) {
         new Select(fundSelect).selectByIndex(number);
         investmentInput.sendKeys(investment);
         yearsSelect.sendKeys(years);
         emailInput.sendKeys(email);
+    }
 
+    public String actualTotalIncome() {
+        return pageDriver.findElement(By.xpath("//div[1]/p")).getText();
+    }
+
+    public String actualInterestIncome() {
+        return pageDriver.findElement(By.xpath("//div[2]/p")).getText();
+    }
+
+
+    public String actualRisk() {
+        return pageDriver.findElement(By.xpath("//div[3]/p")).getText();
     }
 }
