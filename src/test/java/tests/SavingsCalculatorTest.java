@@ -20,19 +20,33 @@ public class SavingsCalculatorTest extends TestBase {
 
    @Test
    public void buttonIsEnable (){ 
-        WebElement firstSelect = driver.findElement(By.id("fundSelect"));
-       new Select(firstSelect).selectByIndex(2);
-       WebElement investmentInput = driver.findElement(By.id("oneTimeInvestmentInput"));
-       investmentInput.sendKeys("3000");
-       WebElement yearsSelect = driver.findElement(By.id("yearsInput"));
-       yearsSelect.sendKeys("5");
-       WebElement emailInput = driver.findElement(By.id("emailInput"));
-       emailInput.sendKeys("gdkf@gmail.com");
+       sendKeysToTable();
        Assert.assertTrue(driver.findElement(By.cssSelector("button.btn-success")).isEnabled());
 
        }
+@Test
+    public void itShouldActualIncomes(){
+        sendKeysToTable();
+        String actualTotalIncome = driver.findElement(By.xpath("//div[1]/p")).getText();
+        String actualInterestIncome = driver.findElement(By.xpath("//div[2]/p")).getText();
+        Assert.assertFalse(actualTotalIncome.isEmpty());
+        Assert.assertFalse(actualInterestIncome.isEmpty());
+
+}
 
 
+
+public void sendKeysToTable (){
+    WebElement firstSelect = driver.findElement(By.id("fundSelect"));
+    new Select(firstSelect).selectByIndex(2);
+    WebElement investmentInput = driver.findElement(By.id("oneTimeInvestmentInput"));
+    investmentInput.sendKeys("3000");
+    WebElement yearsSelect = driver.findElement(By.id("yearsInput"));
+    yearsSelect.sendKeys("5");
+    WebElement emailInput = driver.findElement(By.id("emailInput"));
+    emailInput.sendKeys("gdkf@gmail.com");
+
+}
        }
 
 
