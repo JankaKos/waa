@@ -1,11 +1,15 @@
 package pages;
 
+import models.Note;
+import models.SavingsCalculator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class SavingsCalculatorPage {
 
@@ -18,6 +22,13 @@ public class SavingsCalculatorPage {
     WebElement yearsSelect;
     @FindBy(id = "emailInput")
     WebElement emailInput;
+    @FindBy (xpath = "//div[1]/p")
+            WebElement totalIncome;
+    @FindBy (xpath = "//div[2]/p")
+    WebElement interestIncome;
+    @FindBy (xpath = "//div[3]/p")
+    WebElement risk;
+
 
 
     public SavingsCalculatorPage(WebDriver driver) {
@@ -34,23 +45,28 @@ public class SavingsCalculatorPage {
         return pageDriver.findElement(By.xpath("//ul/li[1]/div"));
     }
 
-    public void sendKeysToTable(Integer number, String investment, String years, String email) {
-        new Select(fundSelect).selectByIndex(number);
-        investmentInput.sendKeys(investment);
-        yearsSelect.sendKeys(years);
-        emailInput.sendKeys(email);
+
+    public void sendKeysToTable(SavingsCalculator savingsCalculator) {
+        new Select(fundSelect).selectByIndex(savingsCalculator.getNumberOfSelect());
+        investmentInput.sendKeys(savingsCalculator.getInvestment());
+        yearsSelect.sendKeys(savingsCalculator.getYears());
+        emailInput.sendKeys(savingsCalculator.getEmail());
     }
 
     public String actualTotalIncome() {
-        return pageDriver.findElement(By.xpath("//div[1]/p")).getText();
+        return totalIncome.getText();
     }
 
     public String actualInterestIncome() {
-        return pageDriver.findElement(By.xpath("//div[2]/p")).getText();
+        return interestIncome.getText();
     }
 
 
     public String actualRisk() {
-        return pageDriver.findElement(By.xpath("//div[3]/p")).getText();
+        return risk.getText();
+    }
+
+    public List<WebElement> getFunds() {
+        return pageDriver.findElements(By.id("fundSelect"));
     }
 }
