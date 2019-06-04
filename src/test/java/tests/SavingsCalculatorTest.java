@@ -26,7 +26,7 @@ public class SavingsCalculatorTest extends TestBase {
 
     Fairy fairy = Fairy.create();
     Person fakePerson = fairy.person();
-    SavingsCalculator savingsCalculatorAdd = new SavingsCalculator(2,"3000","5",fakePerson.getEmail());
+    SavingsCalculator savingsCalculatorAdd = new SavingsCalculator("Hoggwart's Fund","3000","5",fakePerson.getEmail());
 
     @Test
     public void buttonIsEnable() {
@@ -55,7 +55,7 @@ public class SavingsCalculatorTest extends TestBase {
         savingsCalculatorPage.sendKeysToTable(savingsCalculatorAdd);
         savingsCalculatorPage.buttonApply().click();
         Assert.assertTrue(savingsCalculatorPage.lastRecord().isDisplayed());
-        Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains("Fund"));
+        Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains(savingsCalculatorAdd.getTextOfSelect()));
     }
 
 

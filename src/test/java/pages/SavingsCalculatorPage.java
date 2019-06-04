@@ -47,11 +47,13 @@ public class SavingsCalculatorPage {
 
 
     public void sendKeysToTable(SavingsCalculator savingsCalculator) {
-        new Select(fundSelect).selectByIndex(savingsCalculator.getNumberOfSelect());
+        new Select(fundSelect).selectByVisibleText(savingsCalculator.getTextOfSelect());
+        //new Select(fundSelect).selectByIndex(savingsCalculator.getNumberOfSelect());
         investmentInput.sendKeys(savingsCalculator.getInvestment());
         yearsSelect.sendKeys(savingsCalculator.getYears());
         emailInput.sendKeys(savingsCalculator.getEmail());
     }
+
 
     public String actualTotalIncome() {
         return totalIncome.getText();
@@ -61,12 +63,8 @@ public class SavingsCalculatorPage {
         return interestIncome.getText();
     }
 
-
     public String actualRisk() {
         return risk.getText();
     }
 
-    public List<WebElement> getFunds() {
-        return pageDriver.findElements(By.id("fundSelect"));
-    }
 }

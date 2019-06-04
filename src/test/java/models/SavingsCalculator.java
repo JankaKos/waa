@@ -1,21 +1,21 @@
 package models;
 
 public class SavingsCalculator {
-    private Integer numberOfSelect;
+    private String textOfSelect;
     private String investment;
     private String years;
     private String email;
 
-    public SavingsCalculator (Integer numberOfSelect, String investment,String years, String email ){
-        this.numberOfSelect = numberOfSelect;
+    public SavingsCalculator (String textOfSelect, String investment,String years, String email ){
+        this.textOfSelect = textOfSelect;
         this.investment = investment;
         this.years = years;
         this.email= email;
     }
 
 
-    public Integer getNumberOfSelect(){
-        return numberOfSelect;
+    public String getTextOfSelect(){
+        return textOfSelect;
     }
     public String getInvestment(){
         return investment;
