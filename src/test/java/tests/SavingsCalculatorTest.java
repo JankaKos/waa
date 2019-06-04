@@ -53,14 +53,10 @@ public class SavingsCalculatorTest extends TestBase {
     @Test
     public void itShouldDisplayedNewRecord() {
         List <String> listOfOption = new ArrayList<String>();
-        WebElement fundedSelect = driver.findElement(By.id("fundSelect"));
-        //System.out.println(fundedSelect.getText());
         for (int i = 1; i < 8 ; i++) {
-              // new Select(fundedSelect).selectByIndex(i);
                String actualSelect = driver.findElement(By.xpath( "//select/option["+ (i+1) +"]")).getText();
             listOfOption.add(actualSelect);
         }
-       // System.out.println(listOfOption);
         for (String actualOption : listOfOption) {
             SavingsCalculator savingsCalculatorAdd = new SavingsCalculator(actualOption,"3000","5",fakePerson.getEmail());
             savingsCalculatorPage.sendKeysToTable(savingsCalculatorAdd);
