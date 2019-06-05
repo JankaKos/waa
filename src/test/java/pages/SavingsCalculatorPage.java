@@ -1,7 +1,6 @@
 package pages;
 
-import models.Note;
-import models.SavingsCalculator;
+import models.SavingsRequest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SavingsCalculatorPage {
@@ -19,14 +19,14 @@ public class SavingsCalculatorPage {
     @FindBy(id = "oneTimeInvestmentInput")
     WebElement investmentInput;
     @FindBy(id = "yearsInput")
-    WebElement yearsSelect;
+    WebElement yearsInput;
     @FindBy(id = "emailInput")
     WebElement emailInput;
-    @FindBy (xpath = "//div[1]/p")
+    @FindBy (xpath = "//div[@class='result']/div[1]/p")
     WebElement totalIncome;
-    @FindBy (xpath = "//div[2]/p")
+    @FindBy (xpath = "//div[@class='result']/div[2]/p")
     WebElement interestIncome;
-    @FindBy (xpath = "//div[3]/p")
+    @FindBy (xpath = "//div[@class='result']/div[3]/p")
     WebElement risk;
 
 
@@ -46,12 +46,11 @@ public class SavingsCalculatorPage {
     }
 
 
-    public void sendKeysToTable(SavingsCalculator savingsCalculator) {
+    public void fillRequestData(SavingsRequest savingsCalculator) {
         new Select(fundSelect).selectByVisibleText(savingsCalculator.getTextOfSelect());
-        //new Select(fundSelect).selectByIndex(savingsCalculator.getNumberOfSelect());
         investmentInput.sendKeys(savingsCalculator.getInvestment());
-        yearsSelect.sendKeys(savingsCalculator.getYears());
-        emailInput.sendKeys(savingsCalculator.getEmail());
+        yearsInput.sendKeys(savingsCalculator.getYears());
+        emailInput.sendKeys(savingsCalculator.getEmail().getEmail());
     }
 
 
@@ -65,9 +64,23 @@ public class SavingsCalculatorPage {
 
     public String actualRisk() {
         return risk.getText();
+
     }
 
     public int sizeOfOptions (){
        return new Select(fundSelect).getOptions().size();
+    }
+
+
+    public List <String> listOfOption(){
+        List <String> listOfOp = new ArrayList<String>();
+        for(
+        int i = 1;
+        i< sizeOfOptions() ;i++)
+        {
+            String actualSelect = pageDriver.findElement(By.xpath("//select/option[" + (i + 1) + "]")).getText();
+            listOfOp.add(actualSelect);
+        }
+        return listOfOp;
     }
 }
