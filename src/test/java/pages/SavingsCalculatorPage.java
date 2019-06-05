@@ -1,6 +1,7 @@
 package pages;
 
 import models.SavingsRequest;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -73,11 +74,19 @@ public class SavingsCalculatorPage {
 
     public List<String> listOfOptions (){
         List <WebElement> optionElement = new Select (fundSelect).getOptions();
-        List<String> listOfOptions = new ArrayList<String>();
+        List<String> listOfOptions;
+        if (!optionElement.isEmpty()){
+
+        optionElement.remove(0);
+        listOfOptions = new ArrayList<String>();
         for (WebElement option : optionElement) {
             listOfOptions.add(option.getText());
         }
-        return listOfOptions;
+            return listOfOptions;
+        }
+        else
+            return null;
+
 }
 
 
