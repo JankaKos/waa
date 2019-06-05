@@ -53,7 +53,7 @@ public class SavingsCalculatorTest extends TestBase {
     @Test
     public void itShouldDisplayedNewRecord() {
         List <String> listOfOption = new ArrayList<String>();
-        for (int i = 1; i < 8 ; i++) {
+        for (int i = 1; i < savingsCalculatorPage.sizeOfOptions() ; i++) {
                String actualSelect = driver.findElement(By.xpath( "//select/option["+ (i+1) +"]")).getText();
             listOfOption.add(actualSelect);
         }

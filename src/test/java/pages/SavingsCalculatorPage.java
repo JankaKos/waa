@@ -23,7 +23,7 @@ public class SavingsCalculatorPage {
     @FindBy(id = "emailInput")
     WebElement emailInput;
     @FindBy (xpath = "//div[1]/p")
-            WebElement totalIncome;
+    WebElement totalIncome;
     @FindBy (xpath = "//div[2]/p")
     WebElement interestIncome;
     @FindBy (xpath = "//div[3]/p")
@@ -67,4 +67,7 @@ public class SavingsCalculatorPage {
         return risk.getText();
     }
 
+    public int sizeOfOptions (){
+       return new Select(fundSelect).getOptions().size();
+    }
 }
