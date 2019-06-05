@@ -15,21 +15,21 @@ import java.util.List;
 public class SavingsCalculatorPage {
 
     WebDriver pageDriver;
-    @FindBy(id = "fundSelect")
+    private @FindBy(id = "fundSelect")
     WebElement fundSelect;
-    @FindBy(id = "oneTimeInvestmentInput")
+    private @FindBy(id = "oneTimeInvestmentInput")
     WebElement investmentInput;
-    @FindBy(id = "yearsInput")
+    private @FindBy(id = "yearsInput")
     WebElement yearsInput;
-    @FindBy(id = "emailInput")
+    private @FindBy(id = "emailInput")
     WebElement emailInput;
-    @FindBy (xpath = "//div[@class='result']/div[1]/p")
+    private @FindBy (css = "div.result > div:nth-child(1) p")
     WebElement totalIncome;
-    @FindBy (xpath = "//div[@class='result']/div[2]/p")
+    private @FindBy (css = "div.result > div:nth-child(2) p")
     WebElement interestIncome;
-    @FindBy (xpath = "//div[@class='result']/div[3]/p")
+    private @FindBy (css = "div.result > div:nth-child(3) p")
     WebElement risk;
-    public @FindBy(xpath = "//ul[@class='saving-list']/li[1]/div")
+    public @FindBy(css = "ul.saving-list > li:first-child")
     WebElement lastRecord;
 
 
