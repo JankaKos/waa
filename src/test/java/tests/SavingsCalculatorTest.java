@@ -24,7 +24,7 @@ public class SavingsCalculatorTest extends TestBase {
         savingsCalculatorPage = new SavingsCalculatorPage(driver);
         fairy = Fairy.create();
         fakePerson = fairy.person();
-        savingsCalculatorAdd = new SavingsRequest("Hoggwart's Fund","3000","5",fakePerson);
+        savingsCalculatorAdd = new SavingsRequest("McDuck's safe","3000","5",fakePerson);
     }
 
     @Test
@@ -55,8 +55,8 @@ public class SavingsCalculatorTest extends TestBase {
             SavingsRequest savingsCalculatorAdd = new SavingsRequest(actualOption,"3000","5",fakePerson);
             savingsCalculatorPage.fillRequestData(savingsCalculatorAdd);
             savingsCalculatorPage.buttonApply().click();
-            Assert.assertTrue(savingsCalculatorPage.lastRecord().isDisplayed());
-            Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains(actualOption));
+            Assert.assertTrue(savingsCalculatorPage.lastRecord.isDisplayed());
+            Assert.assertTrue(savingsCalculatorPage.lastRecord.getText().contains(actualOption));
         }
 
 
@@ -65,8 +65,8 @@ public class SavingsCalculatorTest extends TestBase {
     public void itShouldDisplayedRecord(){
         savingsCalculatorPage.fillRequestData(savingsCalculatorAdd);
         savingsCalculatorPage.buttonApply().click();
-        Assert.assertTrue(savingsCalculatorPage.lastRecord().isDisplayed());
-        Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains(savingsCalculatorAdd.getTextOfSelect()));
+        Assert.assertTrue(savingsCalculatorPage.lastRecord.isDisplayed());
+        Assert.assertTrue(savingsCalculatorPage.lastRecord.getText().contains(savingsCalculatorAdd.getTextOfSelect()));
     }
 
 

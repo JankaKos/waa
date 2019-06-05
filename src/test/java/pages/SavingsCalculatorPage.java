@@ -29,6 +29,8 @@ public class SavingsCalculatorPage {
     WebElement interestIncome;
     @FindBy (xpath = "//div[@class='result']/div[3]/p")
     WebElement risk;
+    public @FindBy(xpath = "//ul[@class='saving-list']/li[1]/div")
+    WebElement lastRecord;
 
 
 
@@ -42,9 +44,9 @@ public class SavingsCalculatorPage {
         return pageDriver.findElement(By.cssSelector("button.btn-success"));
     }
 
-    public WebElement lastRecord() {
-        return pageDriver.findElement(By.xpath("//ul/li[1]/div"));
-    }
+    //public WebElement lastRecord() {
+     //   return pageDriver.findElement(By.xpath("//ul/li[1]/div"));
+    //}
 
 
     public void fillRequestData(SavingsRequest savingsCalculator) {
