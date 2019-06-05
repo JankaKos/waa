@@ -7,7 +7,10 @@ import models.SavingsRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import pages.SavingsCalculatorPage;
+
+import java.util.List;
 
 public class SavingsCalculatorTest extends TestBase {
     private SavingsCalculatorPage savingsCalculatorPage;
@@ -48,7 +51,7 @@ public class SavingsCalculatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayedNewRecord() {
-        for (String actualOption : savingsCalculatorPage.listOfOption()) {
+        for (String actualOption : savingsCalculatorPage.listOfOptions()) {
             SavingsRequest savingsCalculatorAdd = new SavingsRequest(actualOption,"3000","5",fakePerson);
             savingsCalculatorPage.fillRequestData(savingsCalculatorAdd);
             savingsCalculatorPage.buttonApply().click();

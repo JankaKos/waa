@@ -71,16 +71,14 @@ public class SavingsCalculatorPage {
        return new Select(fundSelect).getOptions().size();
     }
 
-
-    public List <String> listOfOption(){
-        List <String> listOfOp = new ArrayList<String>();
-        for(
-        int i = 1;
-        i< sizeOfOptions() ;i++)
-        {
-            String actualSelect = pageDriver.findElement(By.xpath("//select/option[" + (i + 1) + "]")).getText();
-            listOfOp.add(actualSelect);
+    public List<String> listOfOptions (){
+        List <WebElement> optionElement = new Select (fundSelect).getOptions();
+        List<String> listOfOptions = new ArrayList<String>();
+        for (WebElement option : optionElement) {
+            listOfOptions.add(option.getText());
         }
-        return listOfOp;
-    }
+        return listOfOptions;
+}
+
+
 }
