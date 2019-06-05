@@ -61,6 +61,13 @@ public class SavingsCalculatorTest extends TestBase {
 
 
     }
+    @Test
+    public void itShouldDisplayedRecord(){
+        savingsCalculatorPage.fillRequestData(savingsCalculatorAdd);
+        savingsCalculatorPage.buttonApply().click();
+        Assert.assertTrue(savingsCalculatorPage.lastRecord().isDisplayed());
+        Assert.assertTrue(savingsCalculatorPage.lastRecord().getText().contains(savingsCalculatorAdd.getTextOfSelect()));
+    }
 
 
 }
